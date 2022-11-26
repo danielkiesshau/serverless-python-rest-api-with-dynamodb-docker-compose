@@ -1,3 +1,8 @@
+# This is a FORK to practice Serverless + Localstack
+Forked from: https://github.com/localstack/serverless-python-rest-api-with-dynamodb
+
+I changed the original project to use `docker-compose`. Since I was having trouble in a more complex project, I decided to practice in a more simple one.
+
 # Simple REST API using the Serverless Framework and LocalStack
 
 This example demonstrates how to set up LocalStack for a simple REST API built with the [Serverless Framework](https://www.serverless.com/).
@@ -172,53 +177,13 @@ else:
 
 Start LocalStack by running
 ```bash
-localstack start
+docker-compose up
 ```
 
 Then to deploy the endpoint simply run
 ```bash
 serverless deploy --stage local
 ```
-
-The expected result should be similar to:
-
-```bash
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service serverless-python-rest-api-with-dynamodb.zip file to S3 (38.3 KB)...
-Serverless: Validating template...
-Serverless: Skipping template validation: Unsupported in Localstack
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.....................................
-Serverless: Stack update finished...
-Service Information
-service: serverless-python-rest-api-with-dynamodb
-stage: local
-region: us-east-1
-stack: serverless-python-rest-api-with-dynamodb-local
-resources: 35
-api keys:
-  None
-endpoints:
-  http://localhost:4566/restapis/XXXXXXXXXX/local/_user_request_
-functions:
-  create: serverless-python-rest-api-with-dynamodb-local-create
-  list: serverless-python-rest-api-with-dynamodb-local-list
-  get: serverless-python-rest-api-with-dynamodb-local-get
-  update: serverless-python-rest-api-with-dynamodb-local-update
-  delete: serverless-python-rest-api-with-dynamodb-local-delete
-layers:
-  None
-```
-
-Note the endpoint `http://localhost:4566/restapis/XXXXXXXXXX/local/_user_request_`. We can use this endpoint to interact with our service as demonstrated in the next section. 
 
 ## Usage
 
@@ -291,8 +256,3 @@ When re-deploying the service to LocalStack, you may run into the following issu
  
   The serverless deployment bucket "serverless-python-rest-api-with-dynamodb-local-none-b971536a" does not exist. Create it manually if you want to reuse the CloudFormation stack "serverless-python-rest-api-with-dynamodb-local", or delete the stack if it is no longer required.
 ```
-
-In this case, simply restart the LocalStack Docker container (`ctrl`+`C` and `localstack start`).
-
-## Contributing
-If you run into any issues, please [create an issue](https://github.com/localstack/serverless-python-rest-api-with-dynamodb/issues/new) or, even better, [submit a pull request](https://github.com/localstack/serverless-python-rest-api-with-dynamodb/pulls). 
